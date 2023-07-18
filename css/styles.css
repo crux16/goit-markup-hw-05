@@ -61,9 +61,11 @@ body {
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.32px;
+
+    transition: 250ms;
 }
 .nav.active{
-    padding-bottom: 21px;
+    padding: 25px 0;
 }
 .contact{
     color: var(--seventh-color);
@@ -76,6 +78,7 @@ body {
     background-color: var(--hero-cover);
     background-blend-mode: overlay;
     background-image: url("../images/people-office-1.jpg");
+    background-size: cover;
     color: var(--secondary-color);
 }
 .hero-top-banner{
@@ -131,15 +134,20 @@ body {
     color: var(--third-color);
     background-color: var(--fourth-color);
     border: 1px solid var(--fifth-color);
-    
-    cursor: pointer;
     padding: 12px 24px;
 }
 .proj-cardlist {
-    display: flex;
-    flex-direction: column;
     text-decoration: none;
     color: inherit;
+
+    /* display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit; */
+}
+.proj-cardlist:hover .card-hidden {
+    display: block;
+    transform: translateY(-100%);
 }
 .card-text{
     color:var(--seventh-color);
@@ -154,15 +162,34 @@ body {
 
 /* pseudo-elements */
 .menu-nav .nav:focus,
-.menu-nav .nav:hover,
+.menu-nav .nav:hover {
+    top: 25px;
+    color: var(--sixth-color);
+}
 .menu-nav .nav.active {
     color: var(--sixth-color);
+}
+.menu-nav .nav:hover::after,
+.menu-nav .nav:focus::after {
+    content: "";
+    display: block;
+    position: relative;
+    top: 26px;
+    margin-top: -4px;
+    border: 2px solid var(--sixth-color);
+    border-radius: 4px;
+
+    animation-name: line-test;
+    animation-duration: 250ms;
+    animation: ease;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .menu-nav .nav.active::after {
     content: "";
     display: block;
     position: relative;
-    top: 22px;
+    top: 26px;
+    margin-top: -4px;
     border: 2px solid var(--sixth-color);
     border-radius: 4px;
 }
@@ -200,6 +227,14 @@ body {
     0px 1px 1px 0px rgba(46, 47, 66, 0.16), 
     0px 1px 6px 0px rgba(46, 47, 66, 0.08);
 }
+.proj-cardlist:hover .card-hidden,
+.proj-cardlist:focus .card-hidden  {
+    display: block;
+    opacity: 1;
+    pointer-events: fill;
+    visibility:visible;
+    z-index: 0;
+}
 .socmed-icon:hover,
 .socmed-icon:focus {
     background-color: var(--sixth-color);
@@ -211,6 +246,13 @@ body {
 .client-list:focus  {
     border-color: var(--sixth-color);
     fill: var(--sixth-color);
+}
+.btn-close:hover {
+    background-color: var(--sixth-color);
+    fill: var(--secondary-color);
+    transition-property: background-color, fill;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* container, alignment and resizing */
 .container {
@@ -236,6 +278,7 @@ body {
 }
 .btn-primary {
     margin-top: 48px;
+    cursor: pointer;
 }
 .hero-image {
     padding: 188px 0;
@@ -340,6 +383,10 @@ body {
     justify-content: center;
     border-radius: 50%;
     background-color: var(--third-color);
+
+    transition-property: background-color;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .icon {
     display: inline-block;
@@ -359,6 +406,10 @@ body {
     fill: var(--eight-color);
     border-radius: 4px;
     border: 1px solid var(--eight-color);
+
+    transition-property: fill, border;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* animation */
 .cardlist-hidden {
@@ -427,32 +478,42 @@ body {
     transition: 250ms ease-in-out;
     transform: scale(1) translateY(0);
 }
-.card-hidden{
+.proj-cardlist .card-hidden{
     position: absolute;
-    float: left;
-    display: block;
-    width: 360px;
-    height: 50px;
+    /* display: block; */
+    width: 100%;
+    height: 100%;
     text-align: left;
     padding: 40px 32px;
     color: var(--fourth-color);
     background-color: var(--third-color);
+    transition-property: transform;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     
-    visibility: hidden;
+    /* visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    transition: 500ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
+    z-index: -1; */
 }
 .proj-cardlist {
+    display: flex;
     z-index: 1;
 }
-.proj-image:hover .card-hidden  {
-    height: 300px;
-    margin-top: -300px;
-    opacity: 1;
-    pointer-events: fill;
-    visibility:visible;
-    z-index: 0;
+@keyframes line-test {
+    0% {transform: scaleY(0)}
+    100% {transform: scaleY(1)}
+}
+.proj-overlay {
+    position: relative;
+    overflow:   hidden;
+}
+.portfolio-item {
+    display: flex;
+    width: 360px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.proj-image {
+    min-width: 360px;
 }
