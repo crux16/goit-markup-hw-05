@@ -508,10 +508,6 @@ body {
     display: flex;
     z-index: 1;
 }
-@keyframes line-test {
-    0% {transform: scaleY(0)}
-    100% {transform: scaleY(1)}
-}
 .proj-overlay {
     position: relative;
     overflow:   hidden;
