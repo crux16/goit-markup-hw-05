@@ -145,6 +145,7 @@ body {
     text-decoration: none;
     color: inherit; */
 }
+.proj-cardlist:focus .card-hidden,
 .proj-cardlist:hover .card-hidden {
     display: block;
     transform: translateY(-100%);
